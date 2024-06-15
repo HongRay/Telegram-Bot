@@ -1,0 +1,15 @@
+Here are the functions:
+
+/start - Start the bot and set up the environment
+
+/end - Stop the bot and get the final list of messages
+
+/settopic [your topic] - Set the topic for the message list
+
+/add [your message] - Add a message to the list
+
+/list - List all messages under the current topic
+
+/delete [message number] - Delete a message from the list
+
+/help - Displays all functions
