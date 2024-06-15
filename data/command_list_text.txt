@@ -13,3 +13,5 @@ Here are the functions:
 /delete [message number] - Delete a message from the list
 
 /help - Displays all functions
+
+/clear - Clear entire list in topic

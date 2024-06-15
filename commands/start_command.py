@@ -1,5 +1,5 @@
 from commands.command import Command
-from util.open_command_text import OpenCommandText
+from util.open_file import OpenCommandText
 from telegram import Update
 from telegram.ext import CallbackContext
 

@@ -10,7 +10,9 @@ from commands.list_messages_command import ListMessagesCommand
 from commands.delete_message_command import DeleteMessageCommand
 from commands.mention_response_command import MentionResponseCommand
 from commands.help_command import HelpCommand
+from commands.clear_command import ClearCommand
 from commands.command import Command
+from util.open_file import OpenCommandText
 
 # Dictionaries to store state
 message_dict = {}
@@ -34,7 +36,8 @@ class CommandInvoker:
 invoker = CommandInvoker()
 
 def main() -> None:
-    application = Application.builder().token("7255373802:AAEV5UKJ2NIsCGAVBWs18Qnmw0IxmoCOWkk").build()
+    token = OpenCommandText.get_token()
+    application = Application.builder().token(token).build()
 
     # Register commands with the invoker
     invoker.register("start", StartCommand(bot_started_dict, current_topic_dict, message_dict, last_message_id_dict))
@@ -45,6 +48,7 @@ def main() -> None:
     invoker.register("delete", DeleteMessageCommand(bot_started_dict, current_topic_dict, message_dict, last_message_id_dict))
     invoker.register("mention_response", MentionResponseCommand(bot_started_dict, current_topic_dict, message_dict, last_message_id_dict))
     invoker.register("help", HelpCommand(bot_started_dict, current_topic_dict, message_dict, last_message_id_dict))
+    invoker.register("clear", ClearCommand(bot_started_dict, current_topic_dict, message_dict, last_message_id_dict))
     # Define handler functions that delegate to the invoker
     async def handle_command(update: Update, context: CallbackContext) -> None:
         command_name = update.message.text.split()[0][1:]  # Get command without '/'
@@ -60,6 +64,7 @@ def main() -> None:
     application.add_handler(CommandHandler("list", handle_command))
     application.add_handler(CommandHandler("delete", handle_command))
     application.add_handler(CommandHandler("help", handle_command))
+    application.add_handler(CommandHandler("clear", handle_command))
     # Works only with admin rights 
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_mention_response))
 
