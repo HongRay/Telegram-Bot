@@ -7,7 +7,6 @@ class ClearCommand(Command):
     async def execute(self, update: Update, context: CallbackContext) -> None:
         chat_id = update.effective_chat.id
         
-        # Reset the state for the specific chat_id
         self.message_dict[chat_id] = []
         self.last_message_id_dict[chat_id] = None
         

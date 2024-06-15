@@ -3,14 +3,11 @@ import os
 class OpenCommandText:
     @staticmethod
     def get_text(file_name: str) -> str:
-        # Get the directory of the current script (main.py)
+        # getting file_path from main directory
         main_directory = os.path.dirname(__file__)
-        # Construct the full file path to the data folder one level up
         file_path = os.path.join(main_directory, '..', 'data', file_name)
-        # Normalize the path to avoid issues with relative paths
         file_path = os.path.normpath(file_path)
         try:
-            # Attempt to read the help text from the file
             with open(file_path, 'r') as file:
                 help_text = file.read()
         except FileNotFoundError:
@@ -22,13 +19,11 @@ class OpenCommandText:
     
     @staticmethod
     def get_token() -> str:
+        # getting file_path from main directory
         main_directory = os.path.dirname(__file__)
-        # Construct the full file path to the data folder one level up
         file_path = os.path.join(main_directory, '..', 'data', 'token_id.txt')
-        # Normalize the path to avoid issues with relative paths
         file_path = os.path.normpath(file_path)
         try:
-            # Attempt to read the help text from the file
             with open(file_path, 'r') as file:
                 return file.read()
         except FileNotFoundError:

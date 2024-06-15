@@ -31,15 +31,14 @@ class CommandInvoker:
         command = self._commands.get(command_name)
         if command:
             await command.execute(update, context)
-
-# Creating a global invoker instance
+            
 invoker = CommandInvoker()
 
 def main() -> None:
     token = OpenCommandText.get_token()
     application = Application.builder().token(token).build()
 
-    # Register commands with the invoker
+    # Register commands
     invoker.register("start", StartCommand(bot_started_dict, current_topic_dict, message_dict, last_message_id_dict))
     invoker.register("end", EndCommand(bot_started_dict, current_topic_dict, message_dict, last_message_id_dict))
     invoker.register("settopic", SetTopicCommand(bot_started_dict, current_topic_dict, message_dict, last_message_id_dict))
@@ -49,7 +48,7 @@ def main() -> None:
     invoker.register("mention_response", MentionResponseCommand(bot_started_dict, current_topic_dict, message_dict, last_message_id_dict))
     invoker.register("help", HelpCommand(bot_started_dict, current_topic_dict, message_dict, last_message_id_dict))
     invoker.register("clear", ClearCommand(bot_started_dict, current_topic_dict, message_dict, last_message_id_dict))
-    # Define handler functions that delegate to the invoker
+    
     async def handle_command(update: Update, context: CallbackContext) -> None:
         command_name = update.message.text.split()[0][1:]  # Get command without '/'
         await invoker.execute(command_name, update, context)
@@ -57,6 +56,7 @@ def main() -> None:
     async def handle_mention_response(update: Update, context: CallbackContext) -> None:
         await invoker.execute("mention_response", update, context)
 
+    #adding command handlers 
     application.add_handler(CommandHandler("start", handle_command))
     application.add_handler(CommandHandler("end", handle_command))
     application.add_handler(CommandHandler("settopic", handle_command))
@@ -65,6 +65,7 @@ def main() -> None:
     application.add_handler(CommandHandler("delete", handle_command))
     application.add_handler(CommandHandler("help", handle_command))
     application.add_handler(CommandHandler("clear", handle_command))
+    
     # Works only with admin rights 
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_mention_response))
 
