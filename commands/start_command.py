@@ -11,7 +11,7 @@ class StartCommand(Command):
         self.message_dict[chat_id] = []
         command_list_text_file = 'command_list_text.txt'
         
-        print("Start command received")
+        print("Start command received tttt")
 
         command_list_text =  OpenCommandText.get_text(command_list_text_file)
         

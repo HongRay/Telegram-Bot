@@ -11,6 +11,8 @@ This idea is credited to Alvis Soh, NUSC ambassador and enthusiast, future perm 
 - List Messages: `/list`
 - Delete Message: `/delete [message number]`
 - Clear All Data: `/clear`
+- Show all commands: `/help`
+- Input existing list to track: `/addlist` e.g. `/addlist grab: item1, item2, item3`
 
 ## Getting Started 
 ### Prerequisites
