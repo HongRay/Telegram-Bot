@@ -1,2 +1,3 @@
 venv/
-commands/__pycache__/
+telegram_bot.py
+token_id.txt
